@@ -1,41 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello
+  name: audioinspect
   labels:
-    app: hello
+    app: audioinspect
 spec:
   replicas: 3
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: hello
+      app: audioinspect
   template:
     metadata:
       labels:
-        app: hello
-        tier: hello
+        app: audioinspect
+        tier: audioinspect
     spec:
       containers:
-      - name: hello
-        image: pjbear/hello:latest
+      - name: audioinspect
+        image: haeji/audioinspect:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
-          name: hello
+          name: audioinspect
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello
+  name: audioinspect
   labels:
-    app: hello
+    app: audioinspect
 spec:
   ports:
   - port: 80
     targetPort: 5000
   selector:
-    app: hello
-    tier: hello
+    app: audioinspect
+    tier: audioinspect
   type: LoadBalancer
